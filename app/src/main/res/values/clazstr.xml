@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="clz">
+        <item>com.bobomee.android.colorstatusbar.ui.ViewGroupLayout</item>
+        <item>com.bobomee.android.colorstatusbar.ui.CoordinatorLayout</item>
+        <item>com.bobomee.android.colorstatusbar.ui.ViewLayoutContent</item>
+    </string-array>
+</resources>

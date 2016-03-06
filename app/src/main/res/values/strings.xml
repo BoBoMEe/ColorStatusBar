@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">ColorStatusBar</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_fill">TYPE.FILL</string>
+    <string name="action_nomal">TYPE.NOMAL</string>
+    <string name="action_anim">ANIM_(%b)</string>
+
+    <string name="nav_header_name">%s</string>
+    <string name="header_tips_content">This contentView is %s</string>
+    <string name="show_title_bar">show the title bar or not</string>
+    <string name="change_status_color">change status color</string>
+    <string name="full_screen_transparent">change_activity_background</string>
+
+</resources>
