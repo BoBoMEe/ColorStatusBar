@@ -193,11 +193,7 @@ public class StatusBarUtils {
                 drawer.setFitsSystemWindows(false);
 
                 container.addView(statusView, 0);
-                View belowStatusView = container.getChildAt(1);
 
-                if (!(container instanceof LinearLayout) && belowStatusView != null) {
-                    setMargins(belowStatusView, 0, getStatusBarHeight(mActivity), 0, 0);
-                }
             } else {
                 drawer.setFitsSystemWindows(true);
 

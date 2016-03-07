@@ -1,7 +1,6 @@
 package com.bobomee.android.colorstatusbar.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -60,6 +59,7 @@ public class BaseViewGroupDrawerLayout extends BaseBaseDrawerLayout implements A
     public void changeStatus(View view) {
         Random random = new Random();
         int ranColor = 0xff000000 | random.nextInt(0x00ffffff);
+
         if (toolbar.getVisibility() == View.VISIBLE) {
             toolbar.setBackgroundColor(ranColor);
         }
@@ -68,14 +68,17 @@ public class BaseViewGroupDrawerLayout extends BaseBaseDrawerLayout implements A
     }
 
     public void changeBackground(View view) {
-        setStatusBar(Color.TRANSPARENT);
+        setStatusBar(getResources().getColor(android.R.color.transparent));
 
         int[] res = new int[]{R.mipmap.image01, R.mipmap.image02, R.mipmap.image03};
         Random random = new Random();
         int index = random.nextInt(res.length);
 
         getWindow().getDecorView().setBackgroundResource(res[index]);
-        toolbar.setBackgroundColor(Color.TRANSPARENT);
+
+        if (toolbar.getVisibility() == View.VISIBLE) {
+            toolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        }
     }
 
     @Override
