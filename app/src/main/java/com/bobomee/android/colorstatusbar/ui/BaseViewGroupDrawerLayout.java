@@ -70,11 +70,10 @@ public class BaseViewGroupDrawerLayout extends BaseBaseDrawerLayout implements A
     public void changeBackground(View view) {
         setStatusBar(getResources().getColor(android.R.color.transparent));
 
-        int[] res = new int[]{R.mipmap.image01, R.mipmap.image02, R.mipmap.image03};
         Random random = new Random();
-        int index = random.nextInt(res.length);
+        int ranColor = 0xff000000 | random.nextInt(0x00ffffff);
 
-        getWindow().getDecorView().setBackgroundResource(res[index]);
+        getWindow().getDecorView().setBackgroundColor(ranColor);
 
         if (toolbar.getVisibility() == View.VISIBLE) {
             toolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));

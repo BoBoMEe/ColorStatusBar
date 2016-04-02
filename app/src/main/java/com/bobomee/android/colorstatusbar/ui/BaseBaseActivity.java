@@ -8,9 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bobomee.android.colorstatus.StatusBarUtils;
 import com.bobomee.android.colorstatusbar.MApp;
 import com.bobomee.android.colorstatusbar.R;
-import com.bobomee.android.colorstatusbar.util.StatusBarUtils;
 import com.bobomee.android.colorstatusbar.util.ToastUtil;
 
 /**
