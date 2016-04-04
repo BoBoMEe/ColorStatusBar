@@ -30,6 +30,7 @@ public class StatusBarUtils {
 
     private TYPE style = TYPE.NOMAL;
     private int color;
+    private int alpha;
 
     private ViewGroup root;
 
@@ -132,6 +133,11 @@ public class StatusBarUtils {
         return this;
     }
 
+    public StatusBarUtils setAlpha(int alpha) {
+        this.alpha = alpha;
+        return this;
+    }
+
     private void initStatusBar() {
 
         if (belowKitKat()) return;
@@ -140,13 +146,13 @@ public class StatusBarUtils {
             if (upL()) {
                 mActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                 mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                mActivity.getWindow().setStatusBarColor(color);
+                mActivity.getWindow().setStatusBarColor(calculateStatusColor(color, alpha));
                 return;
             }
 
             if (upKitKat()) {
                 mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                View statusView = createStatusBarView(mActivity, color);
+                View statusView = createStatusBarView(mActivity, color, alpha);
                 //Prevent repeated additions
                 int c = root.getChildCount() - 1;
                 if (setMultipleColor(root, c)) return;
@@ -158,7 +164,7 @@ public class StatusBarUtils {
                 if (style == TYPE.NOMAL) {
                     mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                     mActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                    mActivity.getWindow().setStatusBarColor(color);
+                    mActivity.getWindow().setStatusBarColor(calculateStatusColor(color, alpha));
                     return;
                 } else {
                     mActivity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -171,11 +177,11 @@ public class StatusBarUtils {
             }
 
             if (content instanceof MLinearLayout && style == TYPE.FILL) {
-                ((MLinearLayout) content).getChildAt(0).setBackgroundColor(color);
+                ((MLinearLayout) content).getChildAt(0).setBackgroundColor(calculateStatusColor(color, alpha));
                 return;
             }
 
-            View statusView = createStatusBarView(mActivity, color);
+            View statusView = createStatusBarView(mActivity, color, alpha);
             ViewGroup container = new MLinearLayout(mActivity);
             ((LinearLayout) container).setOrientation(LinearLayout.VERTICAL);
 
@@ -206,21 +212,36 @@ public class StatusBarUtils {
         }
     }
 
+    public int getColor() {
+        return color;
+    }
+
+    private static int calculateStatusColor(int color, int alpha) {
+        float a = 1 - alpha / 255f;
+        int red = color >> 16 & 0xff;
+        int green = color >> 8 & 0xff;
+        int blue = color & 0xff;
+        red = (int) (red * a + 0.5);
+        green = (int) (green * a + 0.5);
+        blue = (int) (blue * a + 0.5);
+        return 0xff << 24 | red << 16 | green << 8 | blue;
+    }
+
     private boolean setMultipleColor(ViewGroup view, int index) {
         View temp = view.getChildAt(index);
         if (null != temp && temp.getHeight() == getStatusBarHeight(mActivity)) {
-            temp.setBackgroundColor(color);
+            temp.setBackgroundColor(calculateStatusColor(color, alpha));
             return true;
         }
         return false;
     }
 
-    private View createStatusBarView(Activity activity, int color) {
+    private View createStatusBarView(Activity activity, int color, int alpha) {
         View statusBarView = new View(activity);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(activity));
         statusBarView.setLayoutParams(params);
-        statusBarView.setBackgroundColor(color);
+        statusBarView.setBackgroundColor(calculateStatusColor(color, alpha));
         return statusBarView;
     }
 

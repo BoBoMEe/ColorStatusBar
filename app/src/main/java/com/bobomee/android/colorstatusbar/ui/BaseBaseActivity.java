@@ -20,6 +20,7 @@ public class BaseBaseActivity extends AppCompatActivity {
 
     protected String TAG = this.getClass().getSimpleName();
     private boolean isFill = true;
+    protected StatusBarUtils instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +32,25 @@ public class BaseBaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-        setStatusBar(getResources().getColor(R.color.colorPrimaryDark));
+        setStatusBar(getResources().getColor(R.color.colorPrimaryDark), 112);
     }
 
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
-        setStatusBar(getResources().getColor(R.color.colorPrimaryDark));
+        setStatusBar(getResources().getColor(R.color.colorPrimaryDark), 112);
     }
 
     @Override
     public void setContentView(View view, ViewGroup.LayoutParams params) {
         super.setContentView(view, params);
-        setStatusBar(getResources().getColor(R.color.colorPrimaryDark));
+        setStatusBar(getResources().getColor(R.color.colorPrimaryDark), 112);
     }
 
-    protected void setStatusBar(int color) {
-        StatusBarUtils.instance(this).setColor(color).
-                setStyle(isFill ? StatusBarUtils.TYPE.FILL : StatusBarUtils.TYPE.NOMAL).init();
+    protected void setStatusBar(int color, int alpha) {
+        instance = StatusBarUtils.instance(this);
+        instance.setColor(color).
+                setStyle(isFill ? StatusBarUtils.TYPE.FILL : StatusBarUtils.TYPE.NOMAL).setAlpha(alpha).init();
 
     }
 

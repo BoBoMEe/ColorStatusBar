@@ -9,7 +9,7 @@ Android 4.4以上实现Material Design风格的状态栏（包括变色状态栏
 <dependency>
   <groupId>com.bobomee.android</groupId>
   <artifactId>colorstatus</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <type>aar</type>
 </dependency>
 ```
@@ -17,10 +17,12 @@ Android 4.4以上实现Material Design风格的状态栏（包括变色状态栏
 - `gradle`
 
 ``` java
-compile 'com.bobomee.android:colorstatus:1.0@aar'
+compile 'com.bobomee.android:colorstatus:1.1@aar'
 ```
 
 ## ScreenShot
+
+![ColorStatusBar](screenshot/gif.gif "Sample")
 
 - Immersive
 

@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bobomee.android.colorstatusbar.R;
@@ -22,6 +23,11 @@ public class BaseViewGroupDrawerLayout extends BaseBaseDrawerLayout implements A
 
     private CheckBox checkBox;
 
+    private SeekBar mSbChangeAlpha;
+    private TextView mTvStatusAlpha;
+
+    private int mAlpha = 112;
+
     protected String[] getListData() {
         return getResources().getStringArray(R.array.clz);
     }
@@ -31,6 +37,8 @@ public class BaseViewGroupDrawerLayout extends BaseBaseDrawerLayout implements A
         super.setContentView(layoutResID);
 
         listView = (ListView) findViewById(android.R.id.list);
+        mSbChangeAlpha = (SeekBar) findViewById(R.id.sb_change_alpha);
+        mTvStatusAlpha = (TextView) findViewById(R.id.tv_status_alpha);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.simple_list_item,
@@ -42,6 +50,27 @@ public class BaseViewGroupDrawerLayout extends BaseBaseDrawerLayout implements A
 
         checkBox = (CheckBox) findViewById(android.R.id.checkbox);
         checkBox.setOnCheckedChangeListener(this);
+
+        mSbChangeAlpha.setMax(255);
+        mSbChangeAlpha.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mAlpha = progress;
+                setStatusBar(instance.getColor(), mAlpha);
+                mTvStatusAlpha.setText(String.valueOf(mAlpha));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        mSbChangeAlpha.setProgress(mAlpha);
 
     }
 
@@ -64,16 +93,16 @@ public class BaseViewGroupDrawerLayout extends BaseBaseDrawerLayout implements A
             toolbar.setBackgroundColor(ranColor);
         }
 
-        setStatusBar(ranColor);
+        setStatusBar(ranColor, mAlpha);
     }
 
     public void changeBackground(View view) {
-        setStatusBar(getResources().getColor(android.R.color.transparent));
 
         Random random = new Random();
         int ranColor = 0xff000000 | random.nextInt(0x00ffffff);
 
         getWindow().getDecorView().setBackgroundColor(ranColor);
+        setStatusBar(ranColor, 0);
 
         if (toolbar.getVisibility() == View.VISIBLE) {
             toolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
