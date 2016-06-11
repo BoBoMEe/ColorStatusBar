@@ -112,9 +112,4 @@ public class BaseBaseActivity extends AppCompatActivity {
         isFill = app.mState;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        StatusBarUtils.instance(this).clear();
-    }
 }

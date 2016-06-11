@@ -19,12 +19,12 @@ def projectGitUrl = properties.getProperty("project.gitUrl")
 def projectDesc = properties.getProperty("project.desc")
 def projectIssueUrl = properties.getProperty("project.issueUrl")
 
-def developerId = DEVELOPER_ID
-def developerName = DEVELOPER_NAME
-def developerEmail = DEVELOPER_EMAIL
+def developerId = "bobomee"
+def developerName = "BoBoMEe"
+def developerEmail = "wbwjx115@gmail.com"
 
-def bintrayUser = BINTRAY_USER
-def bintrayApikey = BINTRAY_KEY
+def bintrayUser = "bobomee"
+def bintrayApikey = "a8bea95a15202a6f8580bb4dc47e3d78f5cc0928"
 
 def javadocName = properties.getProperty("javadoc.name")
 

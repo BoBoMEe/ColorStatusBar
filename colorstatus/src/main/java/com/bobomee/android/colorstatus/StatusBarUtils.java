@@ -103,10 +103,6 @@ public class StatusBarUtils {
 
     }
 
-    public void clear() {
-        this.mActivity = null;
-    }
-
     private boolean upL() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
@@ -117,10 +113,6 @@ public class StatusBarUtils {
 
     private boolean belowKitKat() {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT;
-    }
-
-    public void init() {
-        initStatusBar();
     }
 
     public StatusBarUtils setColor(int color) {
@@ -138,7 +130,7 @@ public class StatusBarUtils {
         return this;
     }
 
-    private void initStatusBar() {
+    public void init() {
 
         if (belowKitKat()) return;
 
